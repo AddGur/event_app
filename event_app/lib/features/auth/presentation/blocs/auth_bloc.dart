@@ -1,8 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_app/features/auth/data/repositories/auth_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -31,19 +30,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onLoginRequested(
       LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    final result = await authRepository.login(event.email, event.password);
-    result.match(
-      (l) => emit(AuthError(message: l.message)),
-      (r) => emit(Authenticated(userId: r.uid)),
-    );
 
     try {
-      // AuthRepository(firebaseAuth: _firebaseAuth)
-      // final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
-      //   email: event.email,
-      //   password: event.password,
-      // );
-      // emit(Authenticated(userId: userCredential.user!.uid));
+      final result = await authRepository.login(event.email, event.password);
+      result.match(
+        (l) => emit(AuthError(message: l.message)),
+        (r) => emit(Authenticated(userId: r.uid)),
+      );
     } catch (e) {
       emit(AuthError(message: e.toString()));
     }
@@ -53,11 +46,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       SignUpEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      // final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-      //   email: event.email,
-      //   password: event.password,
-      // );
-      // emit(Authenticated(userId: userCredential.user!.uid));
+      final userCredential =
+          await authRepository.signUp(event.email, event.password);
+      userCredential.fold((l) => emit(AuthError(message: l.toString())),
+          (r) => emit(Authenticated(userId: r.uid)));
     } catch (e) {
       emit(AuthError(message: e.toString()));
     }

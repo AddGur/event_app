@@ -21,9 +21,18 @@ class AuthRepository {
     }
   }
 
+  Future<Either<AuthFailure, User>> signUp(
+      String email, String password) async {
+    try {
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      return Right(userCredential.user!);
+    } catch (e) {
+      return Left(AuthFailure(e.toString()));
+    }
+  }
+
   Future<void> logout() async {
-    print('logout');
     await _firebaseAuth.signOut();
-    print('_firebaseAuth.currentUser ${_firebaseAuth.currentUser?.uid}');
   }
 }

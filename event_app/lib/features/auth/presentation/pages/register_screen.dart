@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class AuthenticationScreen extends StatefulWidget {
-  const AuthenticationScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<AuthenticationScreen> createState() => _AuthenticationScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _AuthenticationScreenState extends State<AuthenticationScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
 
@@ -48,16 +48,16 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 ),
                 TextButton(
                     onPressed: () {
-                      context.go('/register');
+                      context.go('/login');
                     },
-                    child: const Text('Dont have an account yet? Sing up')),
+                    child: const Text('Already have an acconunt? Log in')),
                 ElevatedButton(
                     onPressed: () {
-                      context.read<AuthBloc>().add(LoginEvent(
+                      context.read<AuthBloc>().add(SignUpEvent(
                           email: emailController.text,
                           password: passwordController.text));
                     },
-                    child: const Text('login'))
+                    child: const Text('sign up'))
               ],
             )),
       ),

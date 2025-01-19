@@ -1,5 +1,5 @@
 import 'package:event_app/features/auth/data/repositories/auth_repository.dart';
-import 'package:event_app/features/auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:event_app/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
