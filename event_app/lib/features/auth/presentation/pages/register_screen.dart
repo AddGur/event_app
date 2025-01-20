@@ -53,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: const Text('Already have an acconunt? Log in')),
                 ElevatedButton(
                     onPressed: () {
-                      context.read<AuthBloc>().add(SignUpEvent(
+                      context.read<AuthBloc>().add(RegisgtrationEvent(
                           email: emailController.text,
                           password: passwordController.text));
                     },

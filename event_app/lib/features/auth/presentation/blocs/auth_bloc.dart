@@ -11,7 +11,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(this.authRepository) : super(AuthInitial()) {
     on<AppStartedEvent>(_onAppStarted);
     on<LoginEvent>(_onLoginRequested);
-    on<SignUpEvent>(_onSignUpRequested);
+    on<RegisgtrationEvent>(_onRegistrationRequested);
     on<LogoutEvent>(_onLogoutRequested);
     on<CheckAuthStatusEvent>(_onCheckAuthStatus);
   }
@@ -42,8 +42,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onSignUpRequested(
-      SignUpEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onRegistrationRequested(
+      RegisgtrationEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
       final userCredential =
@@ -63,12 +63,5 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onCheckAuthStatus(
-      CheckAuthStatusEvent event, Emitter<AuthState> emit) async {
-    // final user = _firebaseAuth.currentUser;
-    // if (user != null) {
-    //   emit(Authenticated(userId: user.uid));
-    // } else {
-    //   emit(Unauthenticated());
-    // }
-  }
+      CheckAuthStatusEvent event, Emitter<AuthState> emit) async {}
 }

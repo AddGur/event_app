@@ -1,5 +1,7 @@
 import 'package:event_app/features/auth/data/repositories/auth_repository.dart';
 import 'package:event_app/features/auth/presentation/blocs/auth_bloc.dart';
+import 'package:event_app/features/home/data/services/event_service.dart';
+import 'package:event_app/features/home/presentation/bloc/events_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
@@ -16,10 +18,10 @@ void init() {
     () => AuthBloc(getIt<AuthRepository>()),
   );
 
-  // Rejestracja NewsRepository
-//   getIt.registerLazySingleton<NewsRepository>(() => NewsRepository());
-
-//   // Rejestracja NewsBloc
-//   getIt.registerFactory<NewsBloc>(() => NewsBloc(newsRepository: getIt<NewsRepository>()));
-// }
+  getIt.registerLazySingleton<EventService>(
+    () => EventService(),
+  );
+  getIt.registerFactory(
+    () => EventsBloc(getIt<EventService>()),
+  );
 }
