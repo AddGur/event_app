@@ -1,5 +1,6 @@
 import 'package:event_app/config/dependencies/injection.dart';
 import 'package:event_app/config/router/app_router.dart';
+import 'package:event_app/core/theme/app_theme.dart';
 import 'package:event_app/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:event_app/features/home/presentation/bloc/events_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,10 +33,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: 'Event app',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: AppTheme.lightTheme,
         routerDelegate: appRouter.router.routerDelegate,
         routeInformationParser: appRouter.router.routeInformationParser,
         routeInformationProvider: appRouter.router.routeInformationProvider,

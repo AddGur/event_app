@@ -1,3 +1,4 @@
+import 'package:event_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldComponent extends StatefulWidget {
@@ -34,7 +35,9 @@ class _TextFieldComponentState extends State<TextFieldComponent> {
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         controller: controller,
-        decoration: InputDecoration(labelText: widget.label),
+        decoration: AppTheme.inputDecoration.copyWith(
+          hintText: widget.label,
+        ),
       ),
     );
   }
